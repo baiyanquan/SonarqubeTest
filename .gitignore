@@ -13,5 +13,4 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 .gitignore
-src/
 .idea/vcs.xml

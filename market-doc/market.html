@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+
+    </style>
+</head>
+
+<body>
+<h1 style="text-align: center;">market数据库设计文档</h1>
+<h2>表汇总</h2>
+<table width="100%">
+
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td> 名称</td>
+        <td>备注</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>commodity</td>
+        <td>商品</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>commodity_factor</td>
+        <td>商品元素关系表</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>customer</td>
+        <td>顾客表</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>customer_factor</td>
+        <td>顾客元素关联表</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>factor</td>
+        <td>元素表</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>flyway_schema_history</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>position</td>
+        <td>货架表</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>record</td>
+        <td>购买记录表</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>unit</td>
+        <td>单位表</td>
+    </tr>
+    </tbody>
+</table>
+<h2>表明细</h2>
+<br>
+<h3>商品(commodity)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>商品id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>name</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>商品名称</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>position_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>是</td>
+        <td>对应货架id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>price</td>
+        <td>int4</td>
+        <td></td>
+        <td>否</td>
+        <td>单价</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>inventory</td>
+        <td>int4</td>
+        <td></td>
+        <td>否</td>
+        <td>库存</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>unit_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>对应单位id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>description</td>
+        <td>varchar</td>
+        <td></td>
+        <td>是</td>
+        <td>商品描述</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>type_id</td>
+        <td>int4</td>
+        <td></td>
+        <td>否</td>
+        <td>对应商品类型id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>code</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>商品编码</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>商品元素关系表(commodity_factor)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>表内id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>commodity_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>商品id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>factor_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>元素id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>degree</td>
+        <td>int4</td>
+        <td></td>
+        <td>是</td>
+        <td>关联程度</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>顾客表(customer)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>顾客id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>code</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>顾客编码</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>name</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>姓名</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>gender</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>性别</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>顾客元素关联表(customer_factor)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>表内id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>customer_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>顾客id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>factor_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>元素id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>degree</td>
+        <td>int4</td>
+        <td></td>
+        <td>是</td>
+        <td>关联程度</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>元素表(factor)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>元素id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>name</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>元素名称</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>(flyway_schema_history)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>installed_rank</td>
+        <td>int4</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>version</td>
+        <td>varchar</td>
+        <td></td>
+        <td>是</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>description</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>type</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>script</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>checksum</td>
+        <td>int4</td>
+        <td></td>
+        <td>是</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>installed_by</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>installed_on</td>
+        <td>timestamp</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>execution_time</td>
+        <td>int4</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>success</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>货架表(position)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>货架id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>name</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>货架具体位置</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>购买记录表(record)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>记录id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>customer_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>顾客id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>commodity_id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>商品id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>quantity</td>
+        <td>int4</td>
+        <td></td>
+        <td>否</td>
+        <td>数量</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>total_price</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>总价</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>degree</td>
+        <td>int4</td>
+        <td></td>
+        <td>是</td>
+        <td>满意程度</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>单位表(unit)</h3>
+<table   width="100%">
+    <thead style="background-color: #b9c9fe;font-weight: bold;">
+    <tr>
+        <td>列名</td>
+        <td>类型</td>
+        <td>KEY</td>
+        <td>可否为空</td>
+        <td>注释</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="background-color: #e8edff;">
+        <td>id</td>
+        <td>int8</td>
+        <td></td>
+        <td>否</td>
+        <td>单位id</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>name</td>
+        <td>varchar</td>
+        <td></td>
+        <td>否</td>
+        <td>单位名称</td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>is_active</td>
+        <td>bool</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>created_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #e8edff;">
+        <td>updated_at</td>
+        <td>timestamptz</td>
+        <td></td>
+        <td>否</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

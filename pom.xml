@@ -17,13 +17,6 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
-    <mirror>
-        <id>central</id>
-        <name>Maven Repository Switchboard</name>
-        <url>https://repo1.maven.org/maven2/</url>
-        <mirrorOf>central</mirrorOf>
-    </mirror>
          
     <dependencies>
         <dependency>
